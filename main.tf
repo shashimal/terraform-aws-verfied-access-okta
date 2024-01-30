@@ -92,8 +92,8 @@ resource "aws_verifiedaccess_trust_provider" "oidc_trust_provider" {
       authorization_endpoint = "https://dev-71497868.okta.com/oauth2/v1/authorize"
       token_endpoint = "https://dev-71497868.okta.com/oauth2/v1/token"
       user_info_endpoint = "https://dev-71497868.okta.com/oauth2/v1/userinfo"
-      client_id = "0oaer8k23sgBc20V45d7"
-      client_secret = "aC0ZOG0rJjCwP75LtuZlcY26gfFDPpbRuH6n3UQW-fz-Cqey6Si2Z3oXSrYKUCAR"
+      client_id = ""
+      client_secret = ""
       scope = "openid profile groups"
   }
 
@@ -157,18 +157,18 @@ resource "aws_verifiedaccess_endpoint" "access_endpoint" {
 }
 
 
-#module "route53_records" {
-#  source  = "terraform-aws-modules/route53/aws//modules/records"
-#  version = "~> 2.0"
-#
-#  zone_id = ""
-#
-#  records = [
-#    {
-#      name           = "app"
-#      type           = "CNAME"
-#      ttl            = 5
-#      records        = [aws_verifiedaccess_endpoint.access_endpoint]
-#    }
-#  ]
-#}
+module "route53_records" {
+  source  = "terraform-aws-modules/route53/aws//modules/records"
+  version = "~> 2.0"
+
+  zone_id = ""
+
+  records = [
+    {
+      name           = "app"
+      type           = "CNAME"
+      ttl            = 5
+      records        = [aws_verifiedaccess_endpoint.access_endpoint]
+    }
+  ]
+}
