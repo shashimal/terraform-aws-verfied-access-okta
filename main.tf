@@ -156,7 +156,6 @@ resource "aws_verifiedaccess_endpoint" "access_endpoint" {
   }
 }
 
-
 module "route53_records" {
   source  = "terraform-aws-modules/route53/aws//modules/records"
   version = "~> 2.0"
